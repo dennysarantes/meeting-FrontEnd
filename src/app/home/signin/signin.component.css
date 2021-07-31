@@ -4,3 +4,7 @@
 
   font-family: 'Encode Sans SC', sans-serif;
 }
+
+a{
+  cursor: pointer;
+}

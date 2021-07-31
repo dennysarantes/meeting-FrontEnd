@@ -1,0 +1,243 @@
+<div class="mt-3">
+
+  <mat-tab-group mat-align-tabs="center" >
+    <!-- Tab Minhas reuniões -->
+    <mat-tab>
+
+      <ng-template mat-tab-label >
+        <div style="margin-right: 5px">
+            <mat-icon class="example-tab-icon">connect_without_contact</mat-icon>
+       </div>
+       <span matBadge={{proximasReunioesList.length}} matBadgeColor="accent" matBadgeOverlap="false"> Minhas reuniões</span>
+
+      </ng-template>
+
+      <!-- Barra de cabeçalho Minhas reuniões-->
+      <div class="teste d-flex align-items-center p-3 my-1 text-white-50 rounded shadow-sm">
+      <div class="lh-100">
+        <h6 class="h6">Minhas reuniões</h6>
+        <small>Todos os detalhes dos seus compromissos estão aqui!</small>
+      </div>
+     </div>
+     <!-- Conteúdo Minhas reuniões -->
+        <app-minhas-reunioes></app-minhas-reunioes>
+    </mat-tab>
+
+    <!-- Minhas tarefas -->
+    <mat-tab>
+      <ng-template mat-tab-label >
+      <div style="margin-right: 5px">
+        <mat-icon class="example-tab-icon">format_list_numbered</mat-icon>
+      </div>
+        <span > Minhas tarefas</span>
+      </ng-template>
+
+      Conteúdo minhas tarefas...
+    </mat-tab>
+
+    <!-- Meus itens de discussão -->
+    <mat-tab >
+      <ng-template mat-tab-label >
+        <div style="margin-right: 5px">
+          <mat-icon class="example-tab-icon">chat_bubble_outline</mat-icon>
+        </div>
+          <span > Meus itens de discussão </span>
+      </ng-template>
+      </mat-tab>
+
+      <!-- Relatórios -->
+    <mat-tab >
+      <ng-template mat-tab-label >
+        <div style="margin-right: 5px">
+          <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+        </div>
+          <span > Relatórios</span>
+      </ng-template>
+      relatórios...
+      </mat-tab>
+
+      <!-- Download de atas -->
+    <mat-tab >
+      <ng-template mat-tab-label >
+        <div style="margin-right: 5px">
+          <mat-icon class="example-tab-icon">save_alt</mat-icon>
+        </div>
+          <span >Download de atas</span>
+          </ng-template>
+          Download de atas...
+      </mat-tab>
+
+
+      <!-- Meus dados -->
+    <mat-tab label="Meus dados">
+      <ng-template mat-tab-label >
+        <div style="margin-right: 5px">
+          <mat-icon class="example-tab-icon">manage_accounts</mat-icon>
+        </div>
+          <span > Meus dados </span>
+          </ng-template>
+          Meus dados...
+      </mat-tab>
+
+  </mat-tab-group>
+
+  </div>
+
+
+<!--  Implementação do TAB MENU com Prime NG - antiga
+<p-tabView>
+  <p-tabPanel leftIcon="pi pi-calendar" header="Minhas Reuniões">
+
+    <div class="teste d-flex align-items-center p-3 my-1 text-white-50 rounded shadow-sm">
+      <div class="lh-100">
+        <h6 class="h6">Minhas reuniões</h6>
+        <small>Todos os detalhes dos seus compromissos estão aqui!</small>
+      </div>
+    </div>
+      <app-minhas-reunioes></app-minhas-reunioes>
+  </p-tabPanel>
+
+  <p-tabPanel leftIcon="pi pi-list" header="Minhas tarefas">
+      <ng-template pTemplate="content">
+          Página de ações...
+      </ng-template>
+  </p-tabPanel>
+  <p-tabPanel leftIcon="pi pi-book" header="Meus itens de discussão">
+      <ng-template pTemplate="content">
+          Página de itens de discussão...
+      </ng-template>
+  </p-tabPanel>
+  <p-tabPanel  leftIcon="pi pi-chart-bar" header="Estatísticas">
+    <ng-template pTemplate="content">
+        Página de estatísticas...
+    </ng-template>
+</p-tabPanel>
+<p-tabPanel leftIcon="pi pi-cloud-download" header="Download de atas">
+  <ng-template pTemplate="content">
+      Página de downloads...
+  </ng-template>
+</p-tabPanel>
+<p-tabPanel leftIcon="pi pi-user-edit" header="Meus dados">
+  <ng-template pTemplate="content">
+      Página de alteração de dados...
+  </ng-template>
+</p-tabPanel>
+</p-tabView> -->
+
+
+
+
+<!-- </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+  <div class="container">
+        <div class="containerX">
+
+
+
+        <div class="card text-center">
+
+          <img
+              class="card-img-top"
+              src="../../../assets/imgs/meninaSentada.png"
+              style="align-self: center; width: 8rem;"
+              height="150px"
+           >
+
+          <div class="card-body">
+            <h6 class="card-title">Suas informações em um só lugar!</h6>
+            <p-divider></p-divider>
+            <p *ngIf="user.qtdReunioes == 0 ; else comReunioesBlock1" class="card-text">Você não possui reuniões agendadas,
+              <a>solicite acesso</a>
+            </p>
+
+            <ng-template #comReunioesBlock1>
+              <p>Você foi incluído em {{ user.qtdReunioes }} reuniões, veja os detalhes</p>
+              <p *ngIf="user.qtdItensProximaReuniao != 0; else comItensBlock" class="card-text">
+                  Você não sugeriu itens de discussão para sua próxima reunião, registre agora
+              </p>
+            </ng-template>
+
+            <p *ngIf="user.qtdReunioes > 0" class="card-text">Sua próxima reunião ocorrerá em {{ user.dataProximaReuniao }}, <a>ver pauta</a></p>
+
+
+
+
+            <ng-template #comItensBlock>
+              <p class="card-text">
+                Você sugeriu {{ user.qtdItensProximaReuniao }} itens de discussão para sua próxima reunião, <a>deseja revisá-los?</a>
+              </p>
+            </ng-template>
+
+            <p *ngIf="user.qtdAcoesPendentes > 1; else umaOuNenhumaReuniaoBlock" class="card-text">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              Você é responsável por {{ user.qtdAcoesPendentes }} ações,
+
+              <a [ngSwitch]="user.qtdAcoesAtrasadas">
+              <a *ngSwitchCase="0"> nenhuma está atrasada, </a>
+              <a *ngSwitchCase="1"> uma está atrasada, </a>
+              <a *ngSwitchCase="user.qtdAcoesPendentes"> todas estão atrasadas, </a>
+              <a *ngIf="user.qtdAcoesAtrasadas > 1"> {{user.qtdAcoesAtrasadas}} estão atrasadas, </a>
+            </a>
+              <a>ver detalhes
+                <i class="bi bi-exclamation-triangle-fill"></i>
+              </a>
+
+            </p>
+
+            <ng-template #umaOuNenhumaReuniaoBlock>
+              <p *ngIf="user.qtdAcoesPendentes == 1; else NenhumaReuniaoBlock" class="card-text">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                Você é responsável por {{ user.qtdAcoesPendentes }} ação,
+                <a *ngIf="user.qtdAcoesAtrasadas > 0 ; else semAtrasosBlock">{{user.qtdAcoesAtrasadas}} está(ão) atrasada(s), </a>
+                <ng-template #semAtrasosBlock>
+                  <a *ngIf="user.qtdAcoesAtrasadas > 0">{{user.qtdAcoesAtrasadas}} está(ão) atrasada(s), </a>
+                </ng-template>
+                <a>ver detalhes
+                  <i class="bi bi-exclamation-triangle-fill"></i>
+                </a>
+              </p>
+              <ng-template #NenhumaReuniaoBlock>
+                <p class="card-text">Você não possui ações pendentes!</p>
+              </ng-template>
+            </ng-template>
+
+            <a class="btn btn-primary">Atualizar dados</a>
+          </div>
+          <div class="card-footer text-muted">
+            Última atualização: 45 segundos
+          </div>
+        </div>
+
+        <img src="../../../assets/imgs/mulherDireita.png" height="auto" width="130px">
+
+      </div>
+</div>
+ -->

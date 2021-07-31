@@ -1,0 +1,12 @@
+
+.barra-lateral{
+  /* background: royalblue; */
+  background-image: linear-gradient(to right, white, lightblue);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+img{
+  margin-right: 50%;
+}

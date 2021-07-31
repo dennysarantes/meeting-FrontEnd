@@ -1,0 +1,21 @@
+.flex-box-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.logout-link{
+  padding-left: 8px;
+  text-decoration: none;
+  color: lightslategray;
+  cursor: pointer;
+}
+
+.logout-name{
+  color: lightslategray;
+}
+
+.logout-link:hover{
+  color: lightcoral;
+}

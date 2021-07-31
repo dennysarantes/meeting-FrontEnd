@@ -1,0 +1,138 @@
+<p-toast></p-toast>
+
+<div class="container" *ngIf="mostrarSpinner == true ; else formBlock">
+  <div class="row align-items-center">
+        <div class="col"></div>
+        <div class="col">
+          <p-progressSpinner
+              [style]="{width: '50px', height: '50px'}"
+              styleClass="custom-spinner"
+              strokeWidth="8" fill="#EEEEEE"
+              animationDuration=".5s">
+          </p-progressSpinner>
+       </div>
+
+    </div>
+</div>
+
+<ng-template #formBlock>
+    <h4 class="text-center mb-3"> Novo usuário</h4>
+    <div class="container">
+    <form [formGroup]="signupForm" class="form" (ngSubmit)="registrarUsuario()"  >
+
+      <!-- Input de Nome completo -->
+
+      <div class="form-floating mb-1">
+        <input
+        class="form-control"
+        #nomeInput id="nomeInput"
+        formControlName="nome"
+        placeholder="Nome completo"
+        >
+        <label for="nomeInput">Nome completo</label>
+
+        <app-mensagens
+        *ngIf="signupForm.get('nome').errors"
+        mensagemDeErro="Nome é obrigatório">
+      </app-mensagens>
+
+    </div>
+
+
+      <!-- Input de E-mail -->
+      <div class="form-floating mb-1">
+        <input
+              #emailInput
+              type="email"
+              id="emailInput"
+              formControlName="email"
+              class="form-control"
+              placeholder="E-mail" >
+        <label for="emailInput">E-mail</label>
+        <app-mensagens
+              *ngIf="signupForm.get('email').errors"
+              mensagemDeErro="Email inválido ou vazio, favor verificar">
+        </app-mensagens>
+      </div>
+
+      <div class="row g-2">
+      <!-- Input de Local de trabalho -->
+        <div class="col-6">
+        <div class="form-floating mb-1">
+          <input
+              #localTrabalhoInput
+              id="localTrabalhoInput"
+              formControlName="localTrabalho"
+              placeholder="Local de trabalho"
+              class="form-control">
+          <label for="localTrabalhoInput">Local de trabalho</label>
+          <app-mensagens *ngIf="signupForm.get('localTrabalho').errors"
+                mensagemDeErro="O local de trabalho é obrigatório">
+          </app-mensagens>
+        </div>
+        </div>
+        <!-- Input de telefone -->
+        <div class="col-6">
+        <div class="form-floating mb-1">
+          <input
+              #telefoneInput
+              id="telefoneInput"
+              formControlName="telefone"
+              placeholder="telefone"
+              class="form-control">
+          <label for="telefoneInput">Telefone</label>
+          <app-mensagens *ngIf="signupForm.get('telefone').errors"
+                mensagemDeErro="Telefone inválido">
+          </app-mensagens>
+        </div>
+        </div>
+      </div>
+
+      <p-divider></p-divider>
+
+      <div class="row g-2 mb-2">
+        <div class="form-group col-6">
+              <div class="input-group flex-nowrap">
+                    <!-- <span class="input-group-text" id="addon-wrapping">@</span> -->
+                    <span class="input-group-text mt-1" id="basic-addon1">
+                        <i class="fa fa-user-circle"></i>
+                    </span>
+                    <app-mensagens *ngIf="signupForm.get('username').errors?.required"
+                          mensagemDeErro="*">
+                    </app-mensagens>
+                   <input #usernameInput id="usernameInput" formControlName="username" placeholder="username" class="form-control mt-1" >
+              </div>
+        </div>
+
+        <div class="form-group col-6">
+              <div class="input-group flex-nowrap">
+                    <!-- <span class="input-group-text" id="addon-wrapping">@</span> -->
+                    <span class="input-group-text mt-1" id="basic-addon1">
+                      <i class="fas fa-key"></i>
+                    </span>
+                  <app-mensagens *ngIf="signupForm.get('senha').errors?.required"
+                        mensagemDeErro="*">
+                  </app-mensagens>
+                  <input #senhaInput id="senhaInput" formControlName="senha" type="password" placeholder="senha" class="form-control mt-1" >
+            </div>
+        </div>
+
+      </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto mt-5">
+            <button
+                [disabled]="!signupForm.valid || signupForm.pending"
+                #registroButton class="btn btn-primary btn-block">
+                Registrar
+            </button>
+        </div>
+
+        <div class="row text-center">
+          <div class="col-md-6 offset-md-3">
+              <p>Já possui cadastro?  <a [routerLink]="['']">Faça o log-in!</a></p>
+          </div>
+        </div>
+    </form>
+</div>
+</ng-template>
+<!-- <button type="button"  pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success p-mb-2"></button> -->

@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Indie Flower';
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/Indie/Indie-Flower-normal-400.eot);
+  src: local('Indie Flower'), url(assets/Indie/Indie-Flower-normal-400.ttf) format('truetype'), url(assets/Indie/Indie-Flower-normal-400.woff2) format('woff2'), url(assets/Indie/Indie-Flower-normal-400.woff) format('woff'), url(assets/Indie/Indie-Flower-normal-400.svg#IndieFlower) format('svg'), url(assets/Indie/Indie-Flower-normal-400.eot?#iefix) format('embedded-opentype');
+}
+

@@ -1,0 +1,36 @@
+/* Flex Container */
+.container {
+  max-width: 350px;
+  margin: 0 auto;
+  display: flex;
+  /* border: 1px solid #ccc; */
+  text-align: center;
+  flex-wrap: wrap
+}
+.profile {
+	flex-direction: row;
+}
+.avatar{
+  width: 300px;
+  align-self: center;
+}
+
+.label-avatar{
+  width: 300px;
+  align-self: center;
+}
+
+.item{
+  width: 300px;
+  color: lightslategrey;
+  /* font-size: 0.5rem; */
+}
+
+.local_trabalho{
+  font-size: 0.8rem;
+  color: lightslategrey;
+}
+
+h1{
+  font-family: 'Indie Flower', cursive;
+}

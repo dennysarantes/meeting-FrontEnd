@@ -82,6 +82,7 @@ export class SigninComponent implements OnInit {
         .subscribe(
           (resp) => {
             console.log('Autenticado com sucesso!')
+            this.router.navigateByUrl('/user');
             //this.router.navigate(['user',  userName.value])  //localhost:4200/user/flavio
           },
           err => {

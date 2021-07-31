@@ -1,3 +1,4 @@
+import { NavegacaoModule } from './navegacao/module/navegacao.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -20,7 +21,8 @@ import { MenuComponent } from './menu/menu.component';
     MenuModule,
     RippleModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    NavegacaoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

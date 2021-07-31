@@ -1,10 +1,10 @@
 <!-- <router-outlet></router-outlet> -->
 
-<div class="container mt-10">
+<div class="container">
 
   <div class="row justify-content-md-center">
     <div class="col-sm-auto">
-        <h4 id="text-login" class="text-center my-5">::: Meeting :::</h4>
+        <h4 id="text-login" class="text-center mb-3">::: Meeting :::</h4>
 
         <form [formGroup]="loginForm" class="form" (ngSubmit)="login()">
               <div class="form-group">
@@ -58,10 +58,9 @@
               </div>
 
         </form>
+        <p-divider></p-divider>
             <div class="justify-content-md-center">
-                <p class="justify-content-md-center">Não tem conta aqui?
-                  <a [routerLink]="['']" class="registre-se">Registre-se agora</a>
-                </p>
+              <p class="center">Ainda não tem conta aqui?  <a [routerLink]="['/signup']" class="registre-se">Registre-se agora</a></p>
             </div>
       </div>
     </div>

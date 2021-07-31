@@ -1,7 +1,9 @@
+import { NewUser } from './../../../navegacao/model/newUser';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode'
 import { User } from '../model/user';
+import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../../token/token.service';
 
 @Injectable({
@@ -9,10 +11,12 @@ import { TokenService } from '../../token/token.service';
 })
 export class UserService {
 
+
   private userName : string = '';
   private userSubject = new BehaviorSubject<User>(null!); //Isso é um Observable do tipo User
 
-constructor(private tokenService : TokenService) {
+constructor(private tokenService : TokenService,
+            private httpClient : HttpClient) {
   if(this.tokenService.hasToken()){
       this.decoteAndNotifica();
   }
@@ -48,6 +52,17 @@ private decoteAndNotifica(){
 
   usuarioEstaLogado() : boolean{
     return !!this.tokenService.hasToken()
+  }
+
+  verificaUserName(){
+    //implementar...
+  }
+
+  registraUsuario(newUser : NewUser){
+
+    const token = this.tokenService.getToken();
+
+    return this.httpClient.post('http://localhost:8080/api/usuario', newUser, {headers: {"Authorization" : "Bearer " + token}});
   }
 
 }

@@ -1,0 +1,24 @@
+<app-sidebar #filho></app-sidebar>
+
+
+
+<div class="flex-box-container mt-3">
+  <button
+      pButton
+      type="button"
+      label="Relatório rápido"
+      icon="pi pi-plus"
+      (click)="filho.abrirMenuFilho()"
+      class="p-button-outlined">
+  </button>
+
+  <p-confirmPopup></p-confirmPopup>
+    <i class="pi pi-user logout-name mt-3">
+     {{ filho.user.nomeCompleto }}
+    <!-- <a (click)="logout()" class='logout-link'>
+       (logout)
+    </a> -->
+    <a (click)="confirm($event)" class='logout-link'>
+      (logout)
+   </a>
+  </i>

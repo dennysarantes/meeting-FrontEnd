@@ -1,0 +1,88 @@
+<mat-accordion class="tab-1">
+  <mat-expansion-panel togglePosition="before" hideToggle="false" >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span
+              matBadge={{proximasReunioesList.length}}
+              matBadgeSize="medium"
+              matBadgePosition="below"
+              matBadgeOverlap="false"
+              matBadgeColor="accent">
+              <span class="titulo-proximas-reunioes">
+                  Próximas reuniões
+              </span>
+        </span>
+      </mat-panel-title>
+      <mat-icon aria-hidden="false" aria-label="reuniões">event_available</mat-icon>
+    </mat-expansion-panel-header>
+
+    <table mat-table [dataSource]="proximasReunioesList" class="mat-elevation-z8">
+
+    <!-- Data -->
+    <ng-container matColumnDef="data">
+      <th mat-header-cell *matHeaderCellDef> Data - Horário </th>
+      <td mat-cell *matCellDef="let element"> {{element.dataAgendamento | date: 'dd-MMM-yyyy - HH:mm'}} </td>
+    </ng-container>
+
+
+     <!-- Titulo -->
+     <ng-container matColumnDef="titulo">
+      <th mat-header-cell *matHeaderCellDef> Titulo </th>
+      <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+    </ng-container>
+
+      <!-- Local -->
+      <ng-container matColumnDef="local">
+        <th mat-header-cell *matHeaderCellDef> Local </th>
+        <td mat-cell *matCellDef="let reuniao"> {{reuniao.local}} </td>
+      </ng-container>
+
+     <!--  Itens -->
+      <ng-container matColumnDef="itens">
+      <th mat-header-cell *matHeaderCellDef> Itens </th>
+      <td mat-cell *matCellDef="let reuniao"> <div class="link-itens" (click)="openDialog(reuniao.id)" >
+        <mat-icon aria-hidden="false" aria-label="Example home icon">format_list_bulleted</mat-icon>
+      </div>
+    </td>
+      </ng-container>
+
+       <!--  Participantes -->
+       <ng-container matColumnDef="participantes">
+        <th mat-header-cell *matHeaderCellDef> Participantes </th>
+        <td mat-cell *matCellDef="let reuniao">
+         <div class="participantes" style="margin-left: 35px ;"><mat-icon aria-hidden="false" aria-label="Example home icon">groups</mat-icon>
+         </div>
+        </td>
+        </ng-container>
+
+       <!--  Confirmar participação -->
+       <ng-container matColumnDef="confirmar">
+        <th mat-header-cell *matHeaderCellDef> Confirmar </th>
+        <td mat-cell *matCellDef="let reuniao">
+           <div  class="confirmar" style="color: lightgreen;"> <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_up_off_alt</mat-icon> </div>
+        </td>
+        </ng-container>
+
+       <!--  Rejeitar participação -->
+       <ng-container matColumnDef="rejeitar">
+        <th mat-header-cell *matHeaderCellDef> Rejeitar </th>
+        <td mat-cell *matCellDef="let reuniao">
+          <div class="rejeitar"> <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_down_off_alt</mat-icon> </div>
+         </td>
+        </ng-container>
+
+        <!--  Download de ata -->
+       <ng-container matColumnDef="pauta">
+        <th mat-header-cell *matHeaderCellDef> Pauta </th>
+        <td mat-cell *matCellDef="let reuniao">
+          <div class="rejeitar"> <mat-icon aria-hidden="false" aria-label="Example home icon">file_present</mat-icon> </div>
+         </td>
+        </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsProximasReunioes"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsProximasReunioes;"></tr>
+  </table>
+
+
+  </mat-expansion-panel>
+  </mat-accordion>

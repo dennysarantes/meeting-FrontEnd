@@ -1,0 +1,32 @@
+<p-sidebar
+  [(visible)]="visibleSidebar"
+  [baseZIndex]="30000"
+  [transitionOptions]="'300ms'"
+  [styleClass]="'p-sidebar-sm'"
+  [style]="{background: 'white'}"
+  >
+
+
+   <!-- <h1>Meeting</h1> -->
+<!-- <div class="logo m-0">
+    <img src="../../../assets/imgs/meeting-logo2.png" alt="meetin">
+  </div> -->
+
+  <section class="container profile">
+    <div class="avatar">
+    <p-avatar  image="../../../assets/imgs/foto.jpeg" shape="circle" size="xlarge"></p-avatar>
+    </div>
+    <div class="label-avatar">
+        <a>{{user.nomeCompleto}}</a>
+    </div>
+    <div class="item local_trabalho">{{ user.localTrabalho }}</div>
+  </section>
+  <p-divider ></p-divider>
+
+  <app-itens-sidebar></app-itens-sidebar>
+  <div class="logo text-center">
+    <img src="../../../assets/imgs/meeting-logo2.png" alt="meetin">
+  </div>
+</p-sidebar>
+
+

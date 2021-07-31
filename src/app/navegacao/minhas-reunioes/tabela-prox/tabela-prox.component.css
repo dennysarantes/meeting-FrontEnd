@@ -1,0 +1,40 @@
+.mat-expansion-panel{
+  background: whitesmoke;
+  color: grey;
+}
+.tab-1 .mat-expansion-panel-header-title {
+  height: 11px;
+  margin-left: 0;
+}
+
+.tab-2 .mat-expansion-panel-header-title {
+  height: 11px;
+  margin-left: 0;
+}
+.titulo-proximas-reunioes{
+  margin-right: 5px;
+
+}
+
+.titulo-antigas-reunioes{
+  margin-right: 5px;
+}
+
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+  color: grey;
+}
+
+table{
+width: 100%;
+background: grey;
+
+}
+
+
+.rejeitar, .confirmar, .baixar{
+  cursor: pointer;
+}
+
+.link-itens{
+  cursor: pointer;
+}
