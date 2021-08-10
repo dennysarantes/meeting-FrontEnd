@@ -16,6 +16,30 @@
 
 }
 
+.mat-sort-header-container, .mat-focus-indicator {
+  color: aliceblue;
+}
+.mat-focus-indicator{
+ color: azure;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: #fff;
+}
+
+::ng-deep #mat-badge-content-3 ,  #mat-badge-content-0 {
+  background: green;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  /* width: 25%; */
+}
+
 .titulo-antigas-reunioes{
   margin-right: 5px;
 }
@@ -31,10 +55,13 @@ background: grey;
 }
 
 
-.rejeitar, .confirmar, .baixar{
+.rejeitar, .confirmar, .baixar, .participantes, .link-itens{
   cursor: pointer;
 }
 
-.link-itens{
-  cursor: pointer;
+.rejeitar:hover{
+  color: lightcoral;
+}
+.participantes:hover, .link-itens:hover, .baixar:hover{
+  color: lightgoldenrodyellow;
 }

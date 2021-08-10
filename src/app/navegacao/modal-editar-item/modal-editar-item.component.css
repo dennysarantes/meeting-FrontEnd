@@ -1,0 +1,9 @@
+.row-data{
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.cdk-overlay-container{
+  z-index: 2000;
+}

@@ -29,10 +29,16 @@ background: grey;
 
 }
 
-.rejeitar, .confirmar, .baixar{
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.rejeitar, .confirmar, .baixar, .participantes , .link-itens{
   cursor: pointer;
 }
 
-.link-itens{
-  cursor: pointer;
+
+.participantes:hover, .link-itens:hover, .baixar:hover{
+  color: lightgoldenrodyellow;
 }

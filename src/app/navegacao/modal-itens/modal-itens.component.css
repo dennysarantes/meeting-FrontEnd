@@ -1,0 +1,33 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.positive:hover {
+  color: red;
+}
+
+.detalhes:hover, .positive-edit:hover{
+  color: green;
+}
+
+.negative-edit:hover , .negative-remove:hover{
+  color: gray;
+}
+
+.positive-meu{
+  font-weight: bolder;
+  color: green;
+}
+
+.adicionar-item-btn:hover{
+  color: blueviolet;
+}
+
+th{
+  padding-right: 2rem;
+}

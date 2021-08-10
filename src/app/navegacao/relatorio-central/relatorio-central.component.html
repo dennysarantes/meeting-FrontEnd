@@ -6,9 +6,10 @@
 
       <ng-template mat-tab-label >
         <div style="margin-right: 5px">
-            <mat-icon class="example-tab-icon">connect_without_contact</mat-icon>
+            <mat-icon  class="example-tab-icon">connect_without_contact</mat-icon>
        </div>
-       <span matBadge={{proximasReunioesList.length}} matBadgeColor="accent" matBadgeOverlap="false"> Minhas reuniões</span>
+       <span (aoRejeitar)="onMudouValor($event)"  matBadge={{this.proximasReunioesList.length}} matBadgeColor="accent" matBadgeOverlap="false"> Minhas reuniões</span>
+       <!-- <span matBadge={{proximasReunioesList.length}} matBadgeColor="accent" matBadgeOverlap="false"> Minhas reuniões</span> -->
 
       </ng-template>
 
@@ -20,14 +21,14 @@
       </div>
      </div>
      <!-- Conteúdo Minhas reuniões -->
-        <app-minhas-reunioes></app-minhas-reunioes>
+        <app-minhas-reunioes (aoMudar)="onMudouValor($event)" ></app-minhas-reunioes>
     </mat-tab>
 
     <!-- Minhas tarefas -->
     <mat-tab>
       <ng-template mat-tab-label >
       <div style="margin-right: 5px">
-        <mat-icon class="example-tab-icon">format_list_numbered</mat-icon>
+        <mat-icon style="color: black;" class="example-tab-icon">format_list_numbered</mat-icon>
       </div>
         <span > Minhas tarefas</span>
       </ng-template>

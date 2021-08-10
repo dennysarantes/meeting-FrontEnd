@@ -1,0 +1,92 @@
+<div class="container" style="width: 400px;">
+  <p>
+    Editar item
+  </p>
+  <form [formGroup]="editarItemForm" class="form" (ngSubmit)="editarItem()"  >
+
+
+    <!-- Input Titulo -->
+
+      <mat-form-field class="form-control mb-2" appearance="fill">
+      <mat-label>Título</mat-label>
+      <input
+          formControlName="titulo"
+          required
+          matInput
+          #tituloInput
+          maxlength="60"
+          placeholder="Ex. Apresentação de resultados...">
+      <mat-hint align="end">{{tituloInput.value.length}} / 60</mat-hint>
+  </mat-form-field>
+     <!-- Input descrição -->
+
+       <mat-form-field class="form-control mt-2" appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <textarea
+                required
+                matInput
+                formControlName="descricao"
+                #descricaoInput
+                maxlength="280"
+                placeholder="Ex. Eu preciso de ajuda para..."></textarea>
+            <mat-hint align="start"><strong>Procure ser objetivo</strong> </mat-hint>
+            <mat-hint align="end">{{descricaoInput.value.length}} / 280</mat-hint>
+        </mat-form-field>
+        <p style="margin-top: 1rem;" >Enviar este item para outra reunião?</p>
+
+
+
+        <mat-slider
+            style="align-self: center;"
+            thumbLabel
+            (change)='setAlterarReuniao()'
+            [displayWith]="alterarData"
+            tickInterval="1"
+            step="0"
+            min="0"
+            max="1"
+            aria-label="units">
+        </mat-slider>
+
+        <div *ngIf="alterarReuniao">
+            <mat-form-field appearance="fill" >
+              <mat-label>Escolha a data da reunião</mat-label>
+              <mat-select
+                  formControlName="idReuniaoNova"
+                 >
+                <mat-option
+                  *ngFor="let reuniao of minhasReunioesAux"
+                  [value]="reuniao.id">
+                  {{reuniao.dataAgendamento | date: 'dd/MM/yyyy - HH:mm'}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+           <!--  <p-calendar
+                formControlName="data"
+                [(ngModel)]="dataProxReuniao"
+                dateFormat="dd/mm/yy"
+                [disabledDays]="[0,6]"
+                [readonlyInput]="true">
+            </p-calendar> -->
+       </div>
+
+
+    <p-divider></p-divider>
+
+    <div class="d-grid gap-2 col-12 mx-auto mt-2">
+      <button
+          [disabled]="!editarItemForm.valid || editarItemForm.pending"
+
+          #salvarButton class="btn btn-primary btn-block">
+          Salvar
+      </button>
+      <button
+          mat-button [mat-dialog-close]="true" cdkFocusInitial
+          #cancelarButton class="btn btn-dark btn-block ml-3">
+          Cancelar
+      </button>
+    </div>
+
+  </form>
+  </div>

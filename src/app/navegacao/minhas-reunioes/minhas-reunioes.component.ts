@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 
 @Component({
@@ -8,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MinhasReunioesComponent implements OnInit {
 
+  @Input() qReunioes! : number;
+  @Output() aoMudar = new EventEmitter<any>();
+
+  valor : any;
 
   constructor(){}
 
@@ -15,6 +19,12 @@ export class MinhasReunioesComponent implements OnInit {
 
   }
 
+  onMudouValor(event : any){
+    //this.proximasReunioesList.length = reunioes;
+     console.log(event);
+     this.aoMudar.emit({novoValor : event.novoValor});
 
+      this.valor = event;
+}
 
 }

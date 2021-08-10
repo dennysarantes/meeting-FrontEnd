@@ -5,6 +5,7 @@ import * as jwt_decode from 'jwt-decode'
 import { User } from '../model/user';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../../token/token.service';
+import { Usuario } from 'src/app/navegacao/model/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ setToken(token : string){
 
 getUser(){
   return this.userSubject.asObservable();
+}
+
+setUser(user : User){
+  this.userSubject.next(user);
 }
 
 getUserName(){

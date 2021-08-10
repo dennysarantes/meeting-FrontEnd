@@ -1,7 +1,7 @@
 <!-- Próximas reuniões -->
-<app-tabela-prox></app-tabela-prox>
+<app-tabela-prox (aoRejeitar)="onMudouValor($event)" ></app-tabela-prox>
 <!-- Reuniões gerais -->
-<app-tabela-prox-noUser></app-tabela-prox-noUser>
+<app-tabela-prox-noUser [qtdReuniao]="valor" ></app-tabela-prox-noUser>
 <!-- Reuniões antigas -->
 <app-tabela-antigas></app-tabela-antigas>
 

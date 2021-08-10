@@ -1,0 +1,54 @@
+<div class="container" style="width: 400px;">
+  <p>
+    Adicionar novo item
+  </p>
+  <form [formGroup]="novoItemForm" class="form" (ngSubmit)="registraItem()"  >
+
+
+    <!-- Input Titulo -->
+
+      <mat-form-field class="form-control mb-2" appearance="fill">
+      <mat-label>Título</mat-label>
+      <input
+          formControlName="titulo"
+          required
+          matInput
+          #tituloInput
+          maxlength="60"
+          placeholder="Ex. Apresentação de resultados...">
+      <mat-hint align="end">{{tituloInput.value.length}} / 60</mat-hint>
+  </mat-form-field>
+     <!-- Input descrição -->
+
+       <mat-form-field class="form-control mt-2" appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <textarea
+                required
+                matInput
+                formControlName="descricao"
+                #descricaoInput
+                maxlength="280"
+                placeholder="Ex. Eu preciso de ajuda para..."></textarea>
+            <mat-hint align="start"><strong>Procure ser objetivo</strong> </mat-hint>
+            <mat-hint align="end">{{descricaoInput.value.length}} / 280</mat-hint>
+        </mat-form-field>
+
+
+    <p-divider></p-divider>
+
+    <div class="d-grid gap-2 col-12 mx-auto mt-2">
+      <button
+          [disabled]="!novoItemForm.valid || novoItemForm.pending"
+
+          #registroButton class="btn btn-primary btn-block">
+          Registrar
+      </button>
+      <button
+          mat-button [mat-dialog-close]="true" cdkFocusInitial
+          #cancelarButton class="btn btn-dark btn-block ml-3">
+          Cancelar
+      </button>
+    </div>
+
+  </form>
+  </div>

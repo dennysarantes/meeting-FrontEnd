@@ -21,13 +21,17 @@ export class SignupComponent implements OnInit {
 
   signupForm: FormGroup | any;
   mostrarSpinner! : boolean;
+  public mask: Array<string | RegExp>
 
   constructor(private formBuilder: FormBuilder,
     //private userNameJaExisteValidator: UserNameJaExisteValidator,
     private userService : UserService,
     private router : Router,
     private detectorPlataformaService : DetectorPlataformaService,
-    private messageService: MessageService) { }
+    private messageService: MessageService) {
+
+      this.mask = ['(', /[1-9]/, /\d/,')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+    }
 
   ngOnInit() {
     this.mostrarSpinner = false;
@@ -88,9 +92,6 @@ export class SignupComponent implements OnInit {
   }
 
   showSuccess() {
-    //Não funciona pq a
     this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Usuário cadastrado!'});
-
-    //alert('Usuário criado com sucesso!')
 }
 }

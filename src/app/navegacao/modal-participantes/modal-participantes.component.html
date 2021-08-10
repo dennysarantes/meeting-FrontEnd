@@ -1,0 +1,52 @@
+<div style="width: 500px;">
+  <h2 mat-dialog-title>Participantes</h2>
+  <h4 class="color: gray;" >Esta lista pode sofrer modificações até a data da reunião</h4>
+  <mat-dialog-content style="width: auto;" class="mat-typography">
+
+  <mat-form-field appearance="standard">
+    <mat-label>Pesquisar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="busque pelo ou nome ou local de trabalho..." #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource"  class="mat-elevation-z8" matSort>
+
+
+      <!-- nome -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+        <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+      </ng-container>
+
+
+      <!-- local de trabalho -->
+      <ng-container matColumnDef="local">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Local de trabalho </th>
+        <td mat-cell *matCellDef="let row"> {{row.localTrabalho}} </td>
+      </ng-container>
+
+        <!-- telefone -->
+        <ng-container matColumnDef="telefone">
+          <th mat-header-cell *matHeaderCellDef > Telefone </th>
+          <td mat-cell *matCellDef="let row"> {{row.telefone}} </td>
+        </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsItens"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsItens;"></tr>
+
+      <!-- Sem dados pesquisados -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Nenhum participante encontrado.</td>
+      </tr>
+    </table>
+
+    <mat-paginator hidePageSize [pageSizeOptions]="[5]" aria-label="Selecione"></mat-paginator>
+  </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="center">
+    <!-- <button mat-button mat-dialog-close>Fechar</button> -->
+    <!-- <button  type="button" style="margin-right: 10px;" class="btn btn-light">+ Adicionar participante</button> -->
+    <button  type="button" class="btn btn-primary" mat-button [mat-dialog-close]="true" cdkFocusInitial>Fechar</button>
+  </mat-dialog-actions>
+  </div>

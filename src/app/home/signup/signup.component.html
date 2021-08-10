@@ -79,7 +79,10 @@
               id="telefoneInput"
               formControlName="telefone"
               placeholder="telefone"
-              class="form-control">
+              class="form-control"
+              [textMask]="{mask: mask}"
+              >
+
           <label for="telefoneInput">Telefone</label>
           <app-mensagens *ngIf="signupForm.get('telefone').errors"
                 mensagemDeErro="Telefone inválido">

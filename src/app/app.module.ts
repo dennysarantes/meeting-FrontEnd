@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/module/home.module';
 import { MenuComponent } from './menu/menu.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

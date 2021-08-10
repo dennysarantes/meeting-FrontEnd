@@ -10,6 +10,7 @@ import { TelaInicialComponent } from '../tela-inicial/tela-inicial.component';
 import {ToastModule} from 'primeng/toast';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {DividerModule} from 'primeng/divider';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {DividerModule} from 'primeng/divider';
             HttpClientModule,
             ToastModule,
             ProgressSpinnerModule,
-            DividerModule]
+            DividerModule,
+            TextMaskModule]
 })
 
 export class HomeModule {}
