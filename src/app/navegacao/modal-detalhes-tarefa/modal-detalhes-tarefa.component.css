@@ -1,0 +1,9 @@
+/* .p-panel-title, .ng-tns-c244-31, .ng-star-inserted, .p-panel-header, .p-panel {
+  font-weight: 100;
+  color: red;
+
+} */
+
+::ng-deep #p-panel-0_header,::ng-deep #p-panel-1_header{
+  font-weight: 100;
+}

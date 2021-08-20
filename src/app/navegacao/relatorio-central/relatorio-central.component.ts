@@ -18,26 +18,34 @@ export class RelatorioCentralComponent implements OnInit {
   user!: User;
   encapsulation! : ViewEncapsulation.None;
   proximasReunioesList : User[] = []
+  qtdMinhasTarefas : number = 0;
 
   constructor(private userService : UserService,
-     private reuniaoService : ReuniaoService) {
-    this.user$ =  userService.getUser();
-    this.user$.subscribe(user => this.user = user);
-    this.reuniaoService.carregarProximasReunioesSemPaginacao()
-    .subscribe((reunioes : Reuniao[] | any) => {
-          this.proximasReunioesList = reunioes;
-          this.qtdTeste = this.proximasReunioesList.length
-    });
+              private reuniaoService : ReuniaoService) {
+              this.user$ =  userService.getUser();
+              this.user$.subscribe(user => this.user = user);
+              this.carregaQtdReunioes();
+              this.carregaQtdTarefasAtrasadas();
+
    }
 
   ngOnInit() {
 
   }
 
-  onMudouValor(event : any){
-       //this.proximasReunioesList.length = reunioes;
-        //console.log('percebeu o evento em relatório central')
-        this.proximasReunioesList.length = event.novoValor;
+  carregaQtdReunioes(){
+    this.reuniaoService.carregarProximasReunioesSemPaginacao()
+    .subscribe((reunioes : Reuniao[] | any) => {
+          this.proximasReunioesList = reunioes;
+          this.qtdTeste = this.proximasReunioesList.length;
+    });
+  }
 
+  carregaQtdTarefasAtrasadas(){
+    this.qtdMinhasTarefas = this.user.qtdAcoesAtrasadas;
+  }
+
+  onMudouValorReunioes(event : any){
+        this.proximasReunioesList.length = event.novoValor;
   }
 }

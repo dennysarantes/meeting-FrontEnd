@@ -1,3 +1,5 @@
+import { ConfirmacaoService } from './../../../services/confirmacao/confirmacao.service';
+import { Confirmacao } from './../../model/confirmacao';
 import { Router } from '@angular/router';
 import { ModalParticipantesComponent } from './../../modal-participantes/modal-participantes.component';
 import { Component, AfterViewInit, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
@@ -17,6 +19,7 @@ import { RelatorioCentralComponent } from '../../relatorio-central/relatorio-cen
 import { ConfirmationService } from 'primeng/api';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {Subject} from 'rxjs';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-tabela-prox',
@@ -32,6 +35,8 @@ export class TabelaProxComponent implements OnInit {
   user!: User;
   userNext! : User;
   previousPageLabel = 'Anterior';
+  checkedcheckedConfirmacao = false;
+  color: ThemePalette = 'primary';
 
   dataSource!: MatTableDataSource<Reuniao>;
 
@@ -54,6 +59,7 @@ export class TabelaProxComponent implements OnInit {
           public dialog: MatDialog,
           private itemService : ItemService,
           private userService : UserService,
+          private confirmacaoService : ConfirmacaoService,
           private router : Router,
           private confirmationService: ConfirmationService)
           {
@@ -107,7 +113,12 @@ export class TabelaProxComponent implements OnInit {
     });
   }
 
-  rejeitar(idReuniao : number, event: Event) {
+  rejeitar(reuniaoTela : Reuniao, event: Event, confirmacao : Confirmacao) {
+
+    if(reuniaoTela.participantes.length == 1){
+      alert('Você é o único participante dessa reunião.')
+    }else{
+
     this.confirmationService.confirm({
       target: event.target!,
       message: 'Seu nome será excluído desta reunião. Deseja continuar?',
@@ -115,7 +126,7 @@ export class TabelaProxComponent implements OnInit {
       rejectLabel: 'Não',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.reuniaoService.removerUsuarioReuniao(idReuniao, this.user.sub)
+        this.reuniaoService.removerUsuarioReuniao(reuniaoTela.id, this.user.sub, confirmacao.id)
         .subscribe( () =>
           this.atualizaDados()
         //console.log(`O usuario de id: ${this.user.sub} foi excluido da reunião id ${idReuniao}...`)
@@ -124,8 +135,23 @@ export class TabelaProxComponent implements OnInit {
       reject: () => {
       }
   });
+}
 
+  }
 
+  atualizarStatus(confirmacao : Confirmacao, idReuniao : number){
+    console.log('mudou!');
+      this.confirmacaoService.atualizaConfirmacao(idReuniao, confirmacao)
+      .subscribe(() =>{
+        this.reuniaoService.carregarProximasReunioesSemPaginacao()
+        .subscribe((reunioes : Reuniao[] | any) => {
+              this.proximasReunioesList = reunioes;
+              this.dataSource = new MatTableDataSource(this.proximasReunioesList);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+              this.reuniaoService.guardarMinhasReunioes(this.proximasReunioesList);
+            });
+      });
 
   }
 
@@ -141,3 +167,5 @@ export class TabelaProxComponent implements OnInit {
         this.aoRejeitar.emit({novoValor : this.proximasReunioesList.length -1 });
   }
 }
+
+

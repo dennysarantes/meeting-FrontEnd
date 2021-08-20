@@ -1,3 +1,4 @@
+import { Confirmacao } from './../../model/confirmacao';
 import { ItemService } from './../../../services/guarda-reuniao/item.service';
 import { Component, Input, OnInit, ViewChild, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,6 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ModalParticipantesComponent } from '../../modal-participantes/modal-participantes.component';
+import { ThemePalette } from '@angular/material/core';
+import { ConfirmacaoService } from 'src/app/services/confirmacao/confirmacao.service';
 
 @Component({
   selector: 'app-tabela-prox-noUser',
@@ -19,9 +22,11 @@ export class TabelaProxNoUserComponent implements OnInit {
 
   @Input() qtdReuniao! : any;
 
-
+  checked = false;
+  color: ThemePalette = 'primary';
   proximasReunioesNotUserList : Reuniao[] = [];
   dataSource!: MatTableDataSource<Reuniao>;
+  ehSolicita : boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -40,16 +45,10 @@ export class TabelaProxNoUserComponent implements OnInit {
   constructor(private itemService : ItemService,
     private reuniaoService : ReuniaoService,
     public dialog: MatDialog,
-    private userService : UserService) {
-      //Monta a lista de próximas reuniões que não consta o usuário
-      this.reuniaoService.carregarProximasReunioesNotUserSemPaginacao()
-      .subscribe((reunioes : Reuniao[] | any) => {
-            this.proximasReunioesNotUserList = reunioes;
-            this.dataSource = new MatTableDataSource(this.proximasReunioesNotUserList);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-            this.reuniaoService.guardarProximasReunioesNoUser(this.proximasReunioesNotUserList);
-      });
+    private userService : UserService,
+    private confirmacaoService : ConfirmacaoService) {
+      this.atualizaDadosTela();
+      console.table(this.proximasReunioesNotUserList);
         }
 
   ngOnInit() {
@@ -57,6 +56,18 @@ export class TabelaProxNoUserComponent implements OnInit {
 
   ngOnChanges(){
       this.onMudouValorIrmao(this.qtdReuniao);
+  }
+
+  atualizaDadosTela(){
+    this.reuniaoService.carregarProximasReunioesNotUserSemPaginacao()
+      .subscribe((reunioes : Reuniao[] | any) => {
+            this.proximasReunioesNotUserList = reunioes;
+            //console.table(this.proximasReunioesNotUserList);
+            this.dataSource = new MatTableDataSource(this.proximasReunioesNotUserList);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+            this.reuniaoService.guardarProximasReunioesNoUser(this.proximasReunioesNotUserList);
+      });
   }
 
   applyFilter(event: Event) {
@@ -93,19 +104,47 @@ export class TabelaProxNoUserComponent implements OnInit {
   }
 
   onMudouValorIrmao(event : any){
-    //this.proximasReunioesList.length = reunioes;
-     console.log('Pegando o evento no componente irmão....');
-     console.log(event);
-     //this.aoMudar.emit({novoValor : event.novoValor});
-     this.reuniaoService.carregarProximasReunioesNotUserSemPaginacao()
-      .subscribe((reunioes : Reuniao[] | any) => {
-            this.proximasReunioesNotUserList = reunioes;
-            this.dataSource = new MatTableDataSource(this.proximasReunioesNotUserList);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-            this.reuniaoService.guardarProximasReunioesNoUser(this.proximasReunioesNotUserList);
-      });
+    //Atualiza os números quando há atualização na table próx. usuário
+     this.atualizaDadosTela();
 }
 
+  atualizarStatus(confirmacao : Confirmacao, idReuniao : number){
+    this.confirmacaoService.atualizaConfirmacao(idReuniao, confirmacao)
+     .subscribe(() => {
+      this.reuniaoService.carregarProximasReunioesNotUserSemPaginacao()
+        .subscribe((reunioes : Reuniao[] | any) => {
+              this.proximasReunioesNotUserList = reunioes;
+              console.table(this.proximasReunioesNotUserList);
+              this.dataSource = new MatTableDataSource(this.proximasReunioesNotUserList);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+              this.reuniaoService.guardarProximasReunioesNoUser(this.proximasReunioesNotUserList);
+        });
+    },
+    (error) => {
+        console.log(error);
+    }
+    );
+  }
+
+  atualizarStatusNull(idReuniao : number){
+    this.confirmacaoService.atualizaConfirmacaoNull(idReuniao)
+    .subscribe(() => {
+        console.log("Enviou!")
+        this.reuniaoService.carregarProximasReunioesNotUserSemPaginacao()
+        .subscribe((reunioes : Reuniao[] | any) => {
+              this.proximasReunioesNotUserList = reunioes;
+              console.table(this.proximasReunioesNotUserList);
+              this.dataSource = new MatTableDataSource(this.proximasReunioesNotUserList);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+              this.reuniaoService.guardarProximasReunioesNoUser(this.proximasReunioesNotUserList);
+        });
+    },
+    (error) => {
+      console.log(error);
+      }
+    );
+  }
 
 }

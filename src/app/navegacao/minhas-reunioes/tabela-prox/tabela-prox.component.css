@@ -27,7 +27,7 @@
   color: #fff;
 }
 
-::ng-deep #mat-badge-content-3 ,  #mat-badge-content-0 {
+::ng-deep #mat-badge-content-0 {
   background: green;
 }
 
@@ -64,4 +64,12 @@ background: grey;
 }
 .participantes:hover, .link-itens:hover, .baixar:hover{
   color: lightgoldenrodyellow;
+}
+
+.confirmado, .duvida:hover{
+  color: lightgreen;
+}
+
+.duvida, .confirmado:hover{
+  color: lightcoral;
 }

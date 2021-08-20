@@ -1,0 +1,28 @@
+.bi-exclamation-triangle-fill{
+  color: red;
+}
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+::ng-deep .example-tab-icon{
+  color: black;
+}
+
+.containerX{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: initial;
+
+}
+
+.teste{
+  background: rgb(161, 112, 155);
+}
+
+.h6{
+  font-size: 2rem;
+  color: azure;
+}

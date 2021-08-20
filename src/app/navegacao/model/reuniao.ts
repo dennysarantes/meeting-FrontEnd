@@ -1,3 +1,4 @@
+import { Confirmacao } from './confirmacao';
 export interface Reuniao {
   id: number;
   titulo: string;
@@ -9,4 +10,5 @@ export interface Reuniao {
   statusReuniao: string;
   participantes: number[];
   itens: number[];
+  confirmacoes : Confirmacao[];
 }

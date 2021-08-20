@@ -9,12 +9,9 @@
 ::ng-deep .example-tab-icon{
   color: black;
 }
-
-::ng-deep #mat-badge-content-3 ,  #mat-badge-content-0, #mat-badge-content-4 {
-  background: green;
+::ng-deep #mat-badge-content-5 {
+  background: red
 }
-
-
 .containerX{
   display: flex;
   flex-direction: row;

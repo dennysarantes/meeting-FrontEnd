@@ -63,9 +63,33 @@
        <ng-container matColumnDef="solicitar">
         <th mat-header-cell *matHeaderCellDef> Solicitar participação </th>
         <td mat-cell *matCellDef="let reuniao">
-           <div  class="confirmar" style="color: lightgreen;">
-             <mat-icon matTooltip="participar desta reunião" aria-hidden="false" aria-label="Example home icon">thumb_up_off_alt</mat-icon> </div>
+        <div  class="confirmar">
+
+          <mat-slide-toggle
+                *ngIf="reuniao.confirmacoes == null || reuniao.confirmacoes.length == 0; else notNull"
+                class="example-margin"
+                [color]="color"
+                [checked]="false"
+                (toggleChange)="atualizarStatusNull(reuniao.id)">
+                solicitar participação?
+          </mat-slide-toggle>
+
+          <ng-template #notNull>
+                <mat-slide-toggle
+                    class="example-margin"
+                    [color]="color"
+                    [checked]="true"
+                    (toggleChange)="atualizarStatus(reuniao.confirmacoes[0], reuniao.id)">
+                    cancelar solicitação?
+                </mat-slide-toggle>
+          </ng-template>
+          </div>
         </td>
+
+        <!-- <td mat-cell *matCellDef="let reuniao">
+           <div  class="confirmar" style="color: lightgreen;">
+             <mat-icon matTooltip="participar desta reunião" aria-hidden="false" aria-label="Example home icon">person_add</mat-icon> </div>
+        </td> -->
         </ng-container>
 
         <!--  Download de ata -->

@@ -43,7 +43,7 @@ export class ReuniaoService {
   carregarProximasReunioesSemPaginacao() : Observable<Reuniao>{
 
     return this.httpClient.get<Reuniao>(
-                  this.url + 'api/reuniao/user-yet-prox',
+                  this.url + 'api/reuniao/user-yet-prox-test',
                   {headers: {"Authorization" : "Bearer " + this.token}})
   }
 
@@ -77,10 +77,10 @@ export class ReuniaoService {
 
   }
 
-  removerUsuarioReuniao(idReuniao: number, idUsuario: number) {
+  removerUsuarioReuniao(idReuniao: number, idUsuario: number, idConfirmacao : number) {
     let token = this.tokenService.getToken();
     return this.httpClient.put(
-                  this.url + 'api/reuniao/retiraruser/' + idReuniao + '/' + idUsuario,{},
+                  this.url + 'api/reuniao/retiraruser/' + idReuniao + '/' + idUsuario + '/' + idConfirmacao,{},
                   {headers: {"Authorization" : "Bearer " + this.token}})
   }
 }

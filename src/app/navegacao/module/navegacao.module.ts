@@ -41,6 +41,14 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {CalendarModule} from 'primeng/calendar';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MinhasTarefasComponent } from '../minhas-tarefas/minhas-tarefas.component';
+import { TarefasAtrasadasComponent } from '../minhas-tarefas/tarefas-atrasadas/tarefas-atrasadas.component';
+import { ModalDetalhesTarefaComponent } from '../modal-detalhes-tarefa/modal-detalhes-tarefa.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import {PanelModule} from 'primeng/panel';
 
 @NgModule({
   imports: [CommonModule,
@@ -49,6 +57,7 @@ import {MatSelectModule} from '@angular/material/select';
     RouterModule,
     HttpClientModule,
     CalendarModule,
+    MatButtonModule,
     TabViewModule,
     MatSelectModule,
     ButtonModule,
@@ -59,6 +68,8 @@ import {MatSelectModule} from '@angular/material/select';
     AccordionModule,
     PanelMenuModule,
     MatExpansionModule,
+    PanelModule,
+    MatDividerModule,
     MatIconModule,
     MatTableModule,
     MatDialogModule,
@@ -71,7 +82,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatSnackBarModule,
     MatTooltipModule,
     MatSliderModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatSlideToggleModule,
+    MatCardModule
   ],
   declarations: [
                   CabecalhoComponent,
@@ -86,7 +99,10 @@ import {MatSelectModule} from '@angular/material/select';
                   ModalItensComponent,
                   ModalParticipantesComponent,
                   ModalNovoItemComponent,
-                  ModalEditarItemComponent
+                  ModalEditarItemComponent,
+                  MinhasTarefasComponent,
+                  TarefasAtrasadasComponent,
+                  ModalDetalhesTarefaComponent
                  ],
   providers : [
     ConfirmationService

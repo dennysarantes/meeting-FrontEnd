@@ -18,7 +18,8 @@ import { TextMaskModule } from 'angular2-text-mask';
                   SigninComponent,
                   SignupComponent
                  ],
-  imports: [CommonModule,
+  imports: [
+            CommonModule,
             ReactiveFormsModule,
             MensagensModule,
             RouterModule,
