@@ -1,3 +1,5 @@
+import { Acao } from "./acao";
+
 export interface Deliberacao {
 
     id : number;
@@ -6,6 +8,5 @@ export interface Deliberacao {
     item : number;
     responsaveis : number[];
     status : string;
-
-
+    acoes : Acao[];
 }

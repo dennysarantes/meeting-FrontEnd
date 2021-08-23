@@ -1,0 +1,27 @@
+<mat-card>
+  <div [ngSwitch]="tipoDuvida">
+      <div *ngSwitchCase="'status'">
+        <mat-card-header>
+          <mat-card-title>O que isso significa??</mat-card-title>
+          <mat-card-subtitle>Status de atraso</mat-card-subtitle>
+        </mat-card-header>
+     <p> Uma tarefa é considerada ATRASADA quando a data limite é alcançada sem que haja uma AÇÃO. </p>
+     <p> Sendo assim, para resolver uma tarefa ATRASADA, basta incluir uma AÇÃO. </p>
+     <p> Assim que a AÇÃO for incluída, esta tarefa passará a constar na aba de "Tarefas concluídas ou canceladas"</p>
+    </div>
+    <div *ngSwitchCase="'item'">
+      <mat-card-header>
+        <mat-card-title>O que isso significa??</mat-card-title>
+        <mat-card-subtitle>Item</mat-card-subtitle>
+      </mat-card-header>
+        <p> Toda TAREFA é originada a partir de um ITEM. </p>
+        <p> O item, por sua vez, é um assunto tratado em reunião</p>
+        <p> Durante a reunião, ao se tratar determinado ITEM, pode ocorrer uma pendência de TAREFA,
+          a qual é atribuída um responsável e uma data limite.
+        </p>
+    </div>
+  </div>
+  <mat-card-actions>
+    <button mat-raised-button mat-dialog-close>Fechar</button>
+  </mat-card-actions>
+</mat-card>

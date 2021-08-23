@@ -1,30 +1,28 @@
-import { TarefasService } from './../../../services/tarefas/tarefas.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ItemService } from 'src/app/services/guarda-reuniao/item.service';
-import { UserService } from 'src/app/services/user/service/user.service';
-import { Deliberacao } from '../../model/deliberacao';
-import { Reuniao } from '../../model/reuniao';
-import { ModalDetalhesTarefaComponent } from '../../modal-detalhes-tarefa/modal-detalhes-tarefa.component';
 import { ItensService } from 'src/app/services/Item/itens.service';
+import { TarefasService } from 'src/app/services/tarefas/tarefas.service';
+import { UserService } from 'src/app/services/user/service/user.service';
+import { ModalDetalhesTarefaComponent } from '../../modal-detalhes-tarefa/modal-detalhes-tarefa.component';
+import { Deliberacao } from '../../model/deliberacao';
 
 @Component({
-  selector: 'app-tarefas-atrasadas',
-  templateUrl: './tarefas-atrasadas.component.html',
-  styleUrls: ['./tarefas-atrasadas.component.css']
+  selector: 'app-tarefas-pendentes',
+  templateUrl: './tarefas-pendentes.component.html',
+  styleUrls: ['./tarefas-pendentes.component.css']
 })
-export class TarefasAtrasadasComponent implements OnInit {
+export class TarefasPendentesComponent implements OnInit {
 
-  deliberacoesAtrasadas : Deliberacao[] = [];
+  deliberacoesPendentes : Deliberacao[] = [];
 
   dataSource!: MatTableDataSource<Deliberacao>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
   today: number = Date.now();
 
   displayedColumnsTarefasAtraso: string[] =
@@ -48,19 +46,21 @@ export class TarefasAtrasadasComponent implements OnInit {
 
     }
 
+
   ngOnInit() {
   }
 
   atualizarDadosNaTela(){
-    this.tarefasService.carregarTarefasAtrasadas()
+    this.tarefasService.carregarTarefasPendentes()
     .subscribe((tarefas : Deliberacao[] | any) => {
-          this.deliberacoesAtrasadas = tarefas;
-          this.dataSource = new MatTableDataSource(this.deliberacoesAtrasadas);
+          this.deliberacoesPendentes = tarefas;
+          this.dataSource = new MatTableDataSource(this.deliberacoesPendentes);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          this.tarefasService.guardaQtdTarefasAtrasadas(this.deliberacoesAtrasadas.length);
+          this.tarefasService.guardaQtdTarefasPendentes(this.deliberacoesPendentes.length);
         });
   }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -71,26 +71,31 @@ export class TarefasAtrasadasComponent implements OnInit {
     }
   }
 
+
   abrirModalDetalhesTarefa(tarefa : Deliberacao){
 
 
-      this.itensService.carregarItemPorIdItem(tarefa.item)
-          .subscribe( item => {
-            this.itemService.guardaItemTemp(item)
-            this.tarefasService.guardaTarefaTemp(tarefa);
-            const dialogRef = this.dialog.open(ModalDetalhesTarefaComponent);
-          });
+    this.itensService.carregarItemPorIdItem(tarefa.item)
+    .subscribe( item => {
+      this.itemService.guardaItemTemp(item)
+      this.tarefasService.guardaTarefaTemp(tarefa);
+      const dialogRef = this.dialog.open(ModalDetalhesTarefaComponent);
+    });
 
 
-
-
-      /* dialogRef.afterClosed().subscribe(result => {
-      console.log('teste');
-      } */
-
+    /* dialogRef.afterClosed().subscribe(result => {
+    console.log('teste');
+    } */
   }
 
   abrirModalIncluirAcao(tarefa : Deliberacao) {
-      console.log('cadastro de acao...')
+    console.log('cadastro de acao...')
+}
+
+  calculaTempoRestante(tarefa : Deliberacao) {
+    let calculo : number = (parseInt(tarefa.dataLimite) - this.today) / 1000 / 60 / 60 / 24;
+    return calculo.toFixed(1).toString().substring(0, calculo.toFixed(1).toString().indexOf('.'))
   }
+
+
 }

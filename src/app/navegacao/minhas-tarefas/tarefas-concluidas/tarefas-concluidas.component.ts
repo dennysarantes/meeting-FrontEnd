@@ -1,39 +1,36 @@
-import { TarefasService } from './../../../services/tarefas/tarefas.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ItemService } from 'src/app/services/guarda-reuniao/item.service';
-import { UserService } from 'src/app/services/user/service/user.service';
-import { Deliberacao } from '../../model/deliberacao';
-import { Reuniao } from '../../model/reuniao';
-import { ModalDetalhesTarefaComponent } from '../../modal-detalhes-tarefa/modal-detalhes-tarefa.component';
 import { ItensService } from 'src/app/services/Item/itens.service';
+import { TarefasService } from 'src/app/services/tarefas/tarefas.service';
+import { UserService } from 'src/app/services/user/service/user.service';
+import { ModalDetalhesTarefaComponent } from '../../modal-detalhes-tarefa/modal-detalhes-tarefa.component';
+import { Deliberacao } from '../../model/deliberacao';
 
 @Component({
-  selector: 'app-tarefas-atrasadas',
-  templateUrl: './tarefas-atrasadas.component.html',
-  styleUrls: ['./tarefas-atrasadas.component.css']
+  selector: 'app-tarefas-concluidas',
+  templateUrl: './tarefas-concluidas.component.html',
+  styleUrls: ['./tarefas-concluidas.component.css']
 })
-export class TarefasAtrasadasComponent implements OnInit {
+export class TarefasConcluidasComponent implements OnInit {
 
-  deliberacoesAtrasadas : Deliberacao[] = [];
-
+  deliberacoesConcluidas : Deliberacao[] = [];
   dataSource!: MatTableDataSource<Deliberacao>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  today: number = Date.now();
 
   displayedColumnsTarefasAtraso: string[] =
   ['index',
    'dataLimite',
+   'dataConclusao',
    'status',
    'descricao',
-   'detalhes',
-   'incluirAcao'
+   'detalhes'
    ];
 
 
@@ -42,25 +39,26 @@ export class TarefasAtrasadasComponent implements OnInit {
     private itemService : ItemService,
     private userService : UserService,
     private tarefasService : TarefasService,
-    private itensService : ItensService,
+    private itensService : ItensService
     ) {
       this.atualizarDadosNaTela();
-
     }
+
 
   ngOnInit() {
   }
 
   atualizarDadosNaTela(){
-    this.tarefasService.carregarTarefasAtrasadas()
+    this.tarefasService.carregarTarefasConcluidas()
     .subscribe((tarefas : Deliberacao[] | any) => {
-          this.deliberacoesAtrasadas = tarefas;
-          this.dataSource = new MatTableDataSource(this.deliberacoesAtrasadas);
+          this.deliberacoesConcluidas = tarefas;
+          this.dataSource = new MatTableDataSource(this.deliberacoesConcluidas);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          this.tarefasService.guardaQtdTarefasAtrasadas(this.deliberacoesAtrasadas.length);
+          this.tarefasService.guardaQtdTarefasPendentes(this.deliberacoesConcluidas.length);
         });
   }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -71,26 +69,27 @@ export class TarefasAtrasadasComponent implements OnInit {
     }
   }
 
+
   abrirModalDetalhesTarefa(tarefa : Deliberacao){
 
-
-      this.itensService.carregarItemPorIdItem(tarefa.item)
-          .subscribe( item => {
-            this.itemService.guardaItemTemp(item)
-            this.tarefasService.guardaTarefaTemp(tarefa);
-            const dialogRef = this.dialog.open(ModalDetalhesTarefaComponent);
-          });
-
+    this.itensService.carregarItemPorIdItem(tarefa.item)
+    .subscribe( item => {
+      this.itemService.guardaItemTemp(item)
+      this.tarefasService.guardaTarefaTemp(tarefa);
+      const dialogRef = this.dialog.open(ModalDetalhesTarefaComponent);
+    });
 
 
-
-      /* dialogRef.afterClosed().subscribe(result => {
-      console.log('teste');
-      } */
-
+    /* dialogRef.afterClosed().subscribe(result => {
+    console.log('teste');
+    } */
   }
 
   abrirModalIncluirAcao(tarefa : Deliberacao) {
-      console.log('cadastro de acao...')
-  }
+    console.log('Vendo acao...')
+
+    console.log(tarefa.acoes[0].descricao);
+}
+
+
 }

@@ -10,8 +10,12 @@
   color: black;
 }
 
-::ng-deep #mat-badge-content-3 ,  #mat-badge-content-0, #mat-badge-content-4 {
+::ng-deep #mat-badge-content-3 ,  #mat-badge-content-0, #mat-badge-content-4, #mat-badge-content-6 {
   background: green;
+}
+
+::ng-deep #mat-badge-content-7 {
+  background: red;
 }
 
 

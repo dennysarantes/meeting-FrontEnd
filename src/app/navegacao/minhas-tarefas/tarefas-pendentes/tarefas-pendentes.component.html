@@ -3,13 +3,13 @@
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span
-              matBadge={{this.deliberacoesAtrasadas.length}}
+              matBadge={{this.deliberacoesPendentes.length}}
               matBadgeSize="medium"
               matBadgePosition="below"
               matBadgeOverlap="false"
               matBadgeColor="accent">
               <span class="titulo-tarefas-atrasadas">
-                  Tarefas atrasadas
+                  Tarefas pendentes
               </span>
         </span>
       </mat-panel-title>
@@ -42,7 +42,7 @@
       <!-- status -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Situação </th>
-        <td mat-cell *matCellDef="let tarefa"> Atrasado há {{ ((tarefa.dataLimite - today) / 1000 / 60 / 60 / 24).toFixed(1).toString().substring(1,((tarefa.dataLimite - today) / 1000 / 60 / 60 / 24).toFixed(1).toString().indexOf('.')) }} dias </td>
+        <td mat-cell *matCellDef="let tarefa"> {{ calculaTempoRestante(tarefa) == '1' ? 'Resta' : 'Restam'}}  {{ ((tarefa.dataLimite - today) / 1000 / 60 / 60 / 24).toFixed(1).toString().substring(0,((tarefa.dataLimite - today) / 1000 / 60 / 60 / 24).toFixed(1).toString().indexOf('.')) }} {{  calculaTempoRestante(tarefa) == '1' ? 'dia' : 'dias' }} até a data limite </td>
       </ng-container>
 
 

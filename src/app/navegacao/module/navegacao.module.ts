@@ -1,3 +1,4 @@
+import { ModalDuvidaComponent } from './../minhas-tarefas/modal-duvida/modal-duvida.component';
 import { ModalNovoItemComponent } from './../modal-novo-item/modal-novo-item.component';
 import { ModalParticipantesComponent } from './../modal-participantes/modal-participantes.component';
 import { TabelaProxComponent } from './../minhas-reunioes/tabela-prox/tabela-prox.component';
@@ -49,6 +50,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {PanelModule} from 'primeng/panel';
+import { TarefasPendentesComponent } from '../minhas-tarefas/tarefas-pendentes/tarefas-pendentes.component';
+import { TarefasConcluidasComponent } from '../minhas-tarefas/tarefas-concluidas/tarefas-concluidas.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -102,7 +105,10 @@ import {PanelModule} from 'primeng/panel';
                   ModalEditarItemComponent,
                   MinhasTarefasComponent,
                   TarefasAtrasadasComponent,
-                  ModalDetalhesTarefaComponent
+                  ModalDetalhesTarefaComponent,
+                  ModalDuvidaComponent,
+                  TarefasPendentesComponent,
+                  TarefasConcluidasComponent
                  ],
   providers : [
     ConfirmationService

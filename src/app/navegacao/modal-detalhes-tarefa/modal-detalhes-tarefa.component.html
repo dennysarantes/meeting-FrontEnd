@@ -1,28 +1,53 @@
 <mat-card class="card">
   <mat-card-header>
     <mat-card-title>Detalhes de tarefa</mat-card-title>
-    <mat-card-subtitle>Status: ATRASADA (desde o dia {{ tarefa.dataLimite | date: 'dd/MM/yyyy' }} )
-      <mat-icon style="color: blue; cursor: pointer;" matTooltip="o que isso significa?" aria-hidden="false" aria-label="Example home icon">info</mat-icon>
+    <mat-card-subtitle>Status:
+      <span [ngSwitch]="tarefa.status">
+        <span  *ngSwitchCase="'ATRASADO'" >ATRASADO desde {{tarefa.dataLimite | date: 'dd/MM/yyyy'}}</span>
+        <span  *ngSwitchCase="'PENDENTE'" >PENDENTE. O prazo para tratamento é até {{tarefa.dataLimite | date: 'dd/MM/yyyy'}}</span>
+        <span  *ngSwitchCase="'CONCLUIDA'" >Concluida em {{tarefa.acoes[0].dataRealizada | date: 'dd/MM/yyyy' }} </span>
+      </span>
+
+
+
+      <mat-icon style="color: blue; cursor: pointer;"
+      matTooltip="o que isso significa?"
+      aria-hidden="false"
+      aria-label="Example home icon"
+      (click)="abrirModalDuvida('status')">
+      info</mat-icon>
     </mat-card-subtitle>
   </mat-card-header>
   <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
   <mat-divider></mat-divider>
   <mat-card-content>
     <p style="margin-top: 2rem;">
-      Esta tarefa foi atribuída a você no dia: XX/XX/XX  (ata da reunião)
+      Esta tarefa foi atribuída a você no dia: {{ item.dataCadastro | date: 'dd/MM/yyyy'}}  (ata da reunião)
     </p>
     <p-panel header="Item de discussão" [collapsed]="true" [toggleable]="true">
       <ng-template pTemplate="icons">
         <i matTooltip="o que isso significa?"
         class="pi pi-info-circle"
-        style="margin-right: 1rem; cursor: pointer;" ></i>
+        style="margin-right: 1rem; cursor: pointer;"
+        (click)="abrirModalDuvida('item')"></i>
       </ng-template>
-      Detalhes do item de discussão que originou a tarefa
+      <p> Descrição do item levado à reunião: </p>
+      <p> {{ item.descricao }}</p>
     </p-panel>
 
-    <p-panel header="Descrição do que precisa ser realizado" [collapsed]="true" [toggleable]="true">
+    <p-panel header="{{ tarefa.status == 'CONCLUIDA'? 'Descrição do que precisava ser realizado' : 'Descrição do que precisa ser realizado'}} "
+             [collapsed]="true"
+             [toggleable]="true">
       {{tarefa.descricao}}
-  </p-panel>
+    </p-panel>
+
+    <p-panel *ngIf="tarefa.status == 'CONCLUIDA'"
+            header="Ação realizada"
+            [collapsed]="true"
+            [toggleable]="true">
+            {{tarefa.acoes[0].descricao}}
+    </p-panel>
+
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button mat-dialog-close>Fechar</button>

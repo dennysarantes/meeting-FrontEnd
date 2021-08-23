@@ -10,6 +10,7 @@ import { UserService } from '../user/service/user.service';
 })
 export class ItensService {
 
+  itemTemp! : Item;
   token! : string;
   url : string = 'http://localhost:8080/';
 
@@ -21,12 +22,28 @@ export class ItensService {
 
                }
 
+  guardaItemTemp(item : Item){
+      this.itemTemp = item;
+  }
+
+  getItemTemp(){
+    return this.itemTemp;
+  }
+
   carregarItensPorReuniao(idReuniao : number) : Observable<Item>{
 
     return this.httpClient.get<Item>(
                   this.url + 'api/item/reuniao/' + idReuniao,
                   {headers: {"Authorization" : "Bearer " + this.token}})
   }
+
+  carregarItemPorIdItem(idItem : number) : Observable<Item>{
+
+    return this.httpClient.get<Item>(
+                  this.url + 'api/item/' + idItem,
+                  {headers: {"Authorization" : "Bearer " + this.token}})
+  }
+
 
   excluirItemPorReuniao(idReuniao : number, idItem : number){
     return this.httpClient.delete<Item>(

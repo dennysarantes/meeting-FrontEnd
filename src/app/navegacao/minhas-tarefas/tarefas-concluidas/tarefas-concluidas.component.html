@@ -3,13 +3,13 @@
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span
-              matBadge={{this.deliberacoesAtrasadas.length}}
+              matBadge={{this.deliberacoesConcluidas.length}}
               matBadgeSize="medium"
               matBadgePosition="below"
               matBadgeOverlap="false"
               matBadgeColor="accent">
               <span class="titulo-tarefas-atrasadas">
-                  Tarefas atrasadas
+                  Histórico de tarefas concluídas
               </span>
         </span>
       </mat-panel-title>
@@ -33,8 +33,14 @@
 
 
 
-     <!-- Data limite -->
-     <ng-container matColumnDef="dataLimite">
+     <!-- Data de conclusão -->
+     <ng-container matColumnDef="dataConclusao">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Data de conclusão </th>
+      <td mat-cell *matCellDef="let tarefa"> {{tarefa.acoes[0].dataRealizada | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <!-- Data limite -->
+    <ng-container matColumnDef="dataLimite">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Data limite </th>
       <td mat-cell *matCellDef="let tarefa"> {{tarefa.dataLimite | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
@@ -42,7 +48,7 @@
       <!-- status -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Situação </th>
-        <td mat-cell *matCellDef="let tarefa"> Atrasado há {{ ((tarefa.dataLimite - today) / 1000 / 60 / 60 / 24).toFixed(1).toString().substring(1,((tarefa.dataLimite - today) / 1000 / 60 / 60 / 24).toFixed(1).toString().indexOf('.')) }} dias </td>
+        <td mat-cell *matCellDef="let tarefa"> {{ tarefa.acoes[0].dataRealizada > tarefa.dataLimite   ? 'CONCLUIDA com atraso' : 'CONCLUIDA em dia' }} </td>
       </ng-container>
 
 
@@ -69,20 +75,7 @@
        </ng-container>
 
 
-        <!--  Incluir ação -->
-       <ng-container matColumnDef="incluirAcao">
-        <th mat-header-cell *matHeaderCellDef>Incluir Ação</th>
-        <td mat-cell *matCellDef="let tarefa">
-               <mat-icon
-               class="incluirAcao"
-               style="cursor: pointer;"
-               matTooltip="Incluir ação"
-               aria-hidden="false"
-               aria-label="Example home icon"
-               (click)="abrirModalIncluirAcao(tarefa)"
-               >post_add</mat-icon>
-            </td>
-        </ng-container>
+
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumnsTarefasAtraso"></tr>
